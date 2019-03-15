@@ -1,29 +1,32 @@
 
 <!DOCTYPE html>
-<style>
-    @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-</style>
 
-
+ 
 <html>
 
+<style>
+ @import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
+</style>
 
 
 <body>
 
-    <canvas id="myCanvas" width="2000" height="1414" style="border:1px solid #000000;">
-        Your browser does not support the HTML5 canvas tag.r{
+<canvas id="myCanvas" width="2000" height="1414" style="border:1px solid #000000;">
+Your browser does not support the HTML5 canvas tag.r{
 
 
 
-    </canvas>
+</canvas>
 
 
-    <!-- qr코드를 이용하기 위해 -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- qr코드를 이용하기 위해 -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
-    <!-- 본문 -->
-    <script>
+<!-- 본문 -->
+<script>
+
+
+
 window.onload = function () {
 
 var canvas = document.getElementById("myCanvas");
@@ -38,7 +41,7 @@ var context = canvas.getContext("2d");
 var image = new Image();
 
 // 이미지 불러오기
-image.src="./background.png";
+image.src="./background";
 
 
 // 캔버스 높이 이미지 크기에 맞게 자동 조절
@@ -47,7 +50,7 @@ context.canvas.height=context.canvas.width/1.41407808492448;
 
 
 // 기준 2000 / 1414
-// 캔버스 가로 세로 크기
+// 캔버스 가로 세로 크기 
 var width = context.canvas.width;
 var height = context.canvas.height;
 
@@ -222,12 +225,12 @@ var price26 = "5000";
 // 그래프 관련 변수
 
 // 그래프 최저 금액
-var min_price = 200;
-
+var min_price = 200; 
+ 
 // 그래프 최고 금액
-var max_price = 600;
-
-
+var max_price = 600; 
+ 
+ 
 // 그래프 실제 값
 var graph_value = [
                     480, // 00
@@ -255,21 +258,21 @@ var graph_value = [
                     420, // 22
                     410, // 23
                     400, // 24
-                ];
-
-
+				];
+ 
+ 
  //고객 하루 평균 충전 이용시간
 var use_time_aver = [9, 21, 0]; // 시, 분, 초
 
 // QR 코드 내용
-var qr_body = "여기에 바로가기 URL 을 입력해 주세요.";
+var qr_body = "여기에 바로가기 URL 을 입력해 주세요."; 
 
 
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 
 
 
@@ -287,10 +290,10 @@ draw();
 
 
 function draw() {
-
-    roof_cnt--; // 반복 횟수
-    m+=0.01; // 곱하기 수치
-
+	   
+	roof_cnt--; // 반복 횟수
+   	m+=0.01; // 곱하기 수치
+    
    // 드로우 메소드 반복설정
   if(roof_cnt > 0){
       myVar = setTimeout(draw, 10);
@@ -305,15 +308,15 @@ function draw() {
 
     // 화면크기 2000 px / 1414 px 좌표 기준입니다.
 
-    font_size(13.15);
+    font_size(13.15); 
     text(day1, 227, 307); // 납부 기한 ("0000년 00월 00일까지")
 
-    font_size(29);
+    font_size(29); 
 
 
 
-
-
+ 	
+  
         context.textAlign = 'end';
         text(numberWithCommas(Math.round(money1*m)), 430, 342); // 납부 금액
 
@@ -323,23 +326,23 @@ function draw() {
         context.fillText(numberWithCommas(Math.round(money2*m)), cal_x(430), cal_y(394));// 납기후 금액
 
 
-        font_size(14);
+        font_size(14); 
         context.fillStyle = "#7C7C7D";
         context.fillText("연체료 "+numberWithCommas(Math.round(money3*m)), cal_x(177), cal_y(411));// 연체료
 
 
-    font_size(15);
+    font_size(15); 
     text(day2, 907, 307); // 사용기간
 
-    font_size(23);
+    font_size(23); 
     text(year1, 806, 338); // 년
 
     text(month1, 865, 338); // 월
 
-    font_size(22);
+    font_size(22); 
     text(registration_plate, 707, 395); // 차량 번호판 정보
 
-    font_size(22);
+    font_size(22); 
     text(name, 852, 395); // 이름
 
     font_size(19);
@@ -379,8 +382,8 @@ function draw() {
     // 이용자 평균
     var graph_px_value =[
                             (transverse_px_max / price17_max ) * Math.round(price17*m),
-                            (transverse_px_max / price18_max ) * Math.round(price18*m),
-                            (transverse_px_max / price19_max ) * Math.round(price19*m),
+                            (transverse_px_max / price18_max ) * Math.round(price18*m),           
+                            (transverse_px_max / price19_max ) * Math.round(price19*m),           
                             (transverse_px_max / price20_max ) * Math.round(price20*m),
                             (transverse_px_max / price21_max ) * Math.round(price21*m),
                             (transverse_px_max / price22_max ) * Math.round(price22*m)
@@ -408,21 +411,21 @@ function draw() {
 
     // 평균 에너지 사용료 비교
 
-    text(numberWithCommas(price17), 901, 588); // 이용자 평균
-    text(numberWithCommas(price18), 901, 634); // 나
-    text(numberWithCommas(price19), 901, 680); // 전체 평균
+    text(numberWithCommas(Math.round(price17*m)), 901, 588); // 이용자 평균
+    text(numberWithCommas(Math.round(price18*m)), 901, 634); // 나
+    text(numberWithCommas(Math.round(price19*m)), 901, 680); // 전체 평균
 
     // 3개월 간 에너지 사용료 비교
 
-    text(numberWithCommas(price20), 901, 781); // 전 전 월 금액
-    text(numberWithCommas(price21), 901, 827); // 전 월 금액
-    text(numberWithCommas(price22), 901, 873); // 당 월 금액
+    text(numberWithCommas(Math.round(price20*m)), 901, 781); // 전 전 월 금액
+    text(numberWithCommas(Math.round(price21*m)), 901, 827); // 전 월 금액
+    text(numberWithCommas(Math.round(price22*m)), 901, 873); // 당 월 금액
 
 
     font_size(15);
-    text(numberWithCommas(month2), 623, 783); // 전 전 월
-    text(numberWithCommas(month3), 623, 828); // 전 전 월 금액
-    text(numberWithCommas(month4), 623, 873); // 당 월 금액
+    text(numberWithCommas(Math.round(month2*m)), 623, 783); // 전 전 월
+    text(numberWithCommas(Math.round(month3*m)), 623, 828); // 전 전 월
+    text(numberWithCommas(Math.round(month4*m)), 623, 873); // 당 월
 
 
 
@@ -512,20 +515,20 @@ function draw() {
 
         // 첫번째 선
         context.moveTo(cal_x(1155),cal_y(626));
-        context.lineTo(cal_x(1904),cal_y(626));
+        context.lineTo(cal_x(1904),cal_y(626)); 
 
         // 두번째 선
         context.moveTo(cal_x(1155),cal_y(684));
-        context.lineTo(cal_x(1904),cal_y(684));
+        context.lineTo(cal_x(1904),cal_y(684)); 
 
 
         // 세번째 선
         context.moveTo(cal_x(1155),cal_y(742));
-        context.lineTo(cal_x(1904),cal_y(742));
+        context.lineTo(cal_x(1904),cal_y(742)); 
 
          // 네번째 선
         context.moveTo(cal_x(1155),cal_y(799.5));
-        context.lineTo(cal_x(1904),cal_y(799.5));
+        context.lineTo(cal_x(1904),cal_y(799.5)); 
 
 
 
@@ -533,7 +536,7 @@ function draw() {
 
         for(var i = 0 ; i<25;i++ ){
           context.moveTo(cal_x(1177+(29.45*i)),cal_y(799.5));
-          context.lineTo(cal_x(1177+(29.45*i)),cal_y(810));
+          context.lineTo(cal_x(1177+(29.45*i)),cal_y(810)); 
         }// for i
 
 
@@ -554,7 +557,7 @@ function draw() {
         var min = graph_value[0] ; // 가장 작은 숫자
         var aver = 0 ; // 평균
 
-        //  가장 큰 숫자, 작은 숫자 구하기
+        //	가장 큰 숫자, 작은 숫자 구하기
         for(var i = 0 ; i< graph_value.length; i++){
 
             if(max < graph_value[i]){
@@ -587,7 +590,7 @@ function draw() {
 
         // 평균 선
         context.moveTo(cal_x(1155),cal_y(aver_px));
-        context.lineTo(cal_x(1904),cal_y(aver_px));
+        context.lineTo(cal_x(1904),cal_y(aver_px)); 
 
 
        context.stroke();
@@ -599,7 +602,7 @@ function draw() {
 
 
         // 그래프 가 표현할 수 있는 범위
-        var cab = max_price - min_price;
+        var cab = max_price - min_price; 
 
         // 1층 올라 갈때 필요한 금액
         var one_Layer = cab/4;
@@ -607,7 +610,7 @@ function draw() {
         var layer1 = min_price + (one_Layer * 0); // 1 층 금액
         var layer2 = min_price + (one_Layer * 1); // 2 층 금액
         var layer3 = min_price + (one_Layer * 2); // 3 층 금액
-        var layer4 = min_price + (one_Layer * 3); // 4 층 금액
+        var layer4 = min_price + (one_Layer * 3); // 4 층 금액 
 
 
         font_size(cal_x(13));
@@ -633,8 +636,8 @@ function draw() {
 
        context.textAlign = 'end';
 
-
-         // 수치 점 그리기
+       
+		 // 수치 점 그리기
         for(var i = 0 ;i < graph_value.length; i++){
 
             graph_point(i,Math.round(graph_value[i]*m));
@@ -694,7 +697,7 @@ function draw() {
         }//for i
 
 
-        // 최저 가격대 조합 순서와, 개수 찾기
+        // 최저 가격대 조합 순서와, 개수 찾기 
        var good_price_index = new Array();
 
        for(var i = 0; i < cal_price.length; i++){
@@ -730,7 +733,7 @@ function draw() {
 
        text(times[good_price_index[i]] +"~"+times[index], cal_x(1225),cal_y(1105+(60*i)));
 
-      }//for i
+      }//for i 
 
      context.textAlign = 'start';
 
@@ -740,7 +743,7 @@ function draw() {
     text(price_forecasting + "원 입니다.",cal_x(1326),cal_y(1130));
 
 
-
+ 
 
 
     if(roof_cnt==0){
@@ -757,138 +760,138 @@ function draw() {
       qr.onload = function(){
           context.drawImage(qr, cal_x(1552), cal_y(1066));
       }
-
+   
    }
-
+ 
 
 
 
 // 가로 비율에 맞게 폰트 텍스트를 자동으로 그려줌
  function text(text, x, y) {
+ 
 
+ 	context.fillStyle = "#2A2B2B";
 
-    context.fillStyle = "#2A2B2B";
-
-    context.fillText(text, cal_x(x), cal_y(y));
-
+	context.fillText(text, cal_x(x), cal_y(y));
+ 
 }/* text */
 
 
 // 가로 비율에 맞게 폰트 사이즈를 자동 변경해줌
  function font_size(size) {
+    
 
-
-    context.font = cal_x(size) + 'px Nanum Square';
-
+ 	context.font = cal_x(size) + 'px Nanum Square';
+ 
 }/* font_size */
 
 
 // 비율에 맞게 그래프 점크기와 위치를 자동으로 잡고 그려줌
  function graph_point(time, money) {
-
-
-    //포인트 색정하기
+ 
+ 
+ 	//포인트 색정하기
    if(max == money){
-        context.fillStyle = "#0081CC";
+	 	context.fillStyle = "#0081CC";
    }else if(min == money){
-        context.fillStyle = "#F08300";
+		context.fillStyle = "#F08300";
    }else{
-        context.fillStyle = "#5F5F5F";
+   		context.fillStyle = "#5F5F5F";
    }
+ 
+ 
+ 
+   	context.beginPath();
+   	context.globalAlpha = 1;
+      
+	var points = get_graph_po_xy(time,money);
+    
 
-
-
-    context.beginPath();
-    context.globalAlpha = 1;
-
-    var points = get_graph_po_xy(time,money);
-
-
-    //점 찍기
-    context.arc(cal_x(points[0]), cal_y(points[1]), cal_x(2.3), 0, 2 * Math.PI, false);
-
-    context.fill();
+	//점 찍기
+	context.arc(cal_x(points[0]), cal_y(points[1]), cal_x(2.3), 0, 2 * Math.PI, false);
+ 
+	context.fill();
     context.closePath();
-
-    //최저 최대 일때 라인 긋기
+  
+	//최저 최대 일때 라인 긋기
    if(max == money || min == money){
+   
+	 	context.beginPath();
+   		context.globalAlpha = 1;
+  		context.strokeStyle = "#9B9B9B";
+  		context.lineWidth=cal_x(1);
+      
+      
+    	context.setLineDash([cal_x(8)]);
+     
+       	context.moveTo(cal_x(points[0]),cal_y(points[1])+cal_x(4.6));
+     	 context.lineTo(cal_x(points[0]),cal_y(799)); 
+  		context.stroke();
+   		context.closePath();
+    
 
-        context.beginPath();
-        context.globalAlpha = 1;
-        context.strokeStyle = "#9B9B9B";
-        context.lineWidth=cal_x(1);
-
-
-        context.setLineDash([cal_x(8)]);
-
-        context.moveTo(cal_x(points[0]),cal_y(points[1])+cal_x(4.6));
-         context.lineTo(cal_x(points[0]),cal_y(799));
-        context.stroke();
-        context.closePath();
-
-
-
+   
    }
+ 
 
-
-
+    
 }/* graph_point */
 
 
 
 // 그래프 그릴 포인트 (위치) 구하기
  function get_graph_po_xy(time, money) {
-
+  
  // 그래프 관련 고정 변수들은 건드리지 말것
  // 세로 1414 기준
   // 그래프 최대 간격
  var graph_max_px = 232;
-
+ 
  // 그래프에서 1원의 가치
  var one_value = graph_max_px /(max_price - min_price);
-
+ 
   // 그래프 시작 길이
  var grapg_start_x = 1177;
-
+ 
  // 그래프 시작 높이
  var grapg_start_y = 800;
-
+ 
  // 현제 금액
  var now_price = money;
 
  var point_x = grapg_start_x+(29.45 * time);
  var point_y = grapg_start_y - one_value * (now_price - min_price);
 
-
+  
   return [point_x, point_y];
-
-
+  
+  
 }/* get_graph_po_xy() */
 
 // 비율에 맞게 그래프 라인 크기와 위치를 자동으로 잡고 그려줌
  function graph_line(time, money) {
+      
+	var points = get_graph_po_xy(time,money);
+    
 
-    var points = get_graph_po_xy(time,money);
-
-
-    //선 그리기
+	//선 그리기
    if(time==0){
     context.moveTo(cal_x(points[0]), cal_y(points[1]));
-
+   
    }else if(time!=24){
      context.lineTo(cal_x(points[0]), cal_y(points[1]))
    }else{
-      context.lineTo(cal_x(points[0]), cal_y(points[1]))
+   	  context.lineTo(cal_x(points[0]), cal_y(points[1]))
       context.lineTo(cal_x(points[0]), cal_y(800));
       context.lineTo(cal_x(1177), cal_y(800));
-
+      
    }//else
-
-
-
-
-
-
+    
+    
+ 
+ 
+ 
+    
 }/* graph_line */
 
 
@@ -909,7 +912,7 @@ function draw() {
 
 };
 
-
+ 
  function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }/* numberWithCommas() */
@@ -918,7 +921,13 @@ function draw() {
 
 
 
-}/* draw */</script>
+}/* draw */
+
+
+
+
+
+</script>
 
 </body>
 </html>
