@@ -274,10 +274,11 @@ image.onload = function(){
 var is_mobile = false;
 
 
-var mobileArr = new Array("iPhone", "iPod", "BlackBerry", "Android", "Windows CE", "LG", "MOT", "SAMSUNG", "SonyEricsson");
+var mobileArr = new Array("iPhone", "iPod", "BlackBerry", "Android", "Windows CE", "LG", "MOT", "SAMSUNG", "SonyEricsson","Android 7.1.2","Nexus 6P Build/WHALE");
 
 for(var txt in mobileArr){
     if(navigator.userAgent.match(mobileArr[txt]) != null){
+    
         is_mobile = true;
         break;
     }//if
