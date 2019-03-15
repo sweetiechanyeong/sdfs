@@ -1,12 +1,11 @@
 
 <!DOCTYPE html>
-
 <style>
-    @import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
+    @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 </style>
 
-<html>
 
+<html>
 
 
 
@@ -56,7 +55,7 @@ var height = context.canvas.height;
 image.onload = function(){
 
  // 고지서 배경 이미지 그리기
- context.drawImage(image, 0, 0);
+
  context.textAlign = 'end';
 
 
@@ -110,7 +109,7 @@ var price5 = "5000";
 var price6 = "5000";
 
 // 전력기금
-var price7 = "5,000";
+var price7 = "5000";
 
 // 원단위절사
 var price8 = "5000";
@@ -276,458 +275,491 @@ var qr_body = "여기에 바로가기 URL 을 입력해 주세요.";
 
 // 위치 연산
 // -------------------------- 위치 --------------------------
+var roof_cnt = 100;
+var m = 0;
 
-// 화면크기 2000 px / 1414 px 좌표 기준입니다.
 
-font_size(13.15);
-text(day1, 227, 307); // 납부 기한 ("0000년 00월 00일까지")
-
-font_size(29);
+draw();
 
 
 
-text(numberWithCommas(money1), 430, 342); // 납부 금액
 
 
 
-    context.fillStyle = "#7C7C7D";
-    context.fillText(numberWithCommas(money2), cal_x(430), cal_y(394));// 납기후 금액
+function draw() {
+
+    roof_cnt--; // 반복 횟수
+    m+=0.01; // 곱하기 수치
+
+   // 드로우 메소드 반복설정
+  if(roof_cnt > 0){
+      myVar = setTimeout(draw, 10);
+  }else{
+      m=1;
+  }
+
+
+
+    //고지서 배경 그리기
+     context.drawImage(image, 0, 0);
+
+    // 화면크기 2000 px / 1414 px 좌표 기준입니다.
+
+    font_size(13.15);
+    text(day1, 227, 307); // 납부 기한 ("0000년 00월 00일까지")
+
+    font_size(29);
+
+
+
+
+
+        context.textAlign = 'end';
+        text(numberWithCommas(Math.round(money1*m)), 430, 342); // 납부 금액
+
+
+
+        context.fillStyle = "#7C7C7D";
+        context.fillText(numberWithCommas(Math.round(money2*m)), cal_x(430), cal_y(394));// 납기후 금액
+
+
+        font_size(14);
+        context.fillStyle = "#7C7C7D";
+        context.fillText("연체료 "+numberWithCommas(Math.round(money3*m)), cal_x(177), cal_y(411));// 연체료
+
+
+    font_size(15);
+    text(day2, 907, 307); // 사용기간
+
+    font_size(23);
+    text(year1, 806, 338); // 년
+
+    text(month1, 865, 338); // 월
+
+    font_size(22);
+    text(registration_plate, 707, 395); // 차량 번호판 정보
+
+    font_size(22);
+    text(name, 852, 395); // 이름
+
+    font_size(19);
+    text(numberWithCommas(Math.round(price1*m)), 435, 568); // 충전요금
 
 
     font_size(14);
-    context.fillStyle = "#7C7C7D";
-    context.fillText("연체료 "+numberWithCommas(money3), cal_x(177), cal_y(411));// 연체료
+    text(numberWithCommas(Math.round(price2*m)), 437, 614); // 기본요금
+    text(numberWithCommas(Math.round(price3*m)), 437, 649); // 전력량 요금
+    text(numberWithCommas(Math.round(price4*m)), 437, 684); // EV충전 할인
+    text(numberWithCommas(Math.round(price5*m)), 437, 718); // 전기 요금계
+    text(numberWithCommas(Math.round(price6*m)), 437, 753); // 부가가치세
+    text(numberWithCommas(Math.round(price7*m)), 437, 787); // 전력기금
+    text(numberWithCommas(Math.round(price8*m)), 437, 822); // 원단위절사
+    text(numberWithCommas(Math.round(price9*m)), 437, 856); // 당월요금계
 
 
-font_size(15);
-text(day2, 907, 307); // 사용기간
+    text(numberWithCommas(Math.round(price10*m)), 437, 1103); // 계약종별
+    text(numberWithCommas(Math.round(price11*m)), 437, 1138); // 선택 요금
+    text(numberWithCommas(Math.round(price12*m)), 437, 1172); // 정기 검침일
+    text(numberWithCommas(Math.round(price13*m)), 437, 1207); // 계량기 번호
+    text(numberWithCommas(Math.round(price14*m)), 437, 1241); // 계량기 배수
+    text(numberWithCommas(Math.round(price15*m)), 437, 1276); // 역 율
+    text(numberWithCommas(Math.round(price16*m)), 437, 1310); // 계약 전력
 
-font_size(23);
-text(year1, 806, 338); // 년
 
-text(month1, 865, 338); // 월
 
-font_size(22);
-text(registration_plate, 707, 395); // 차량 번호판 정보
+    // 가로 막대 그래프 최대 크기
+    var transverse_px_max = 278;
+    context.fillStyle = "#9FD9F6";
 
-font_size(22);
-text(name, 852, 395); // 이름
+    // 가로 막대 그래프 높이
+    var graph_bar_height = 23;
 
-font_size(19);
-text(numberWithCommas(price1), 435, 568); // 충전요금
 
 
-font_size(14);
-text(numberWithCommas(price2), 437, 614); // 기본요금
-text(numberWithCommas(price3), 437, 649); // 전력량 요금
-text(numberWithCommas(price4), 437, 684); // EV충전 할인
-text(numberWithCommas(price5), 437, 718); // 전기 요금계
-text(numberWithCommas(price6), 437, 753); // 부가가치세
-text(numberWithCommas(price7), 437, 787); // 전력기금
-text(numberWithCommas(price8), 437, 822); // 원단위절사
-text(numberWithCommas(price9), 437, 856); // 당월요금계
+    // 이용자 평균
+    var graph_px_value =[
+                            (transverse_px_max / price17_max ) * Math.round(price17*m),
+                            (transverse_px_max / price18_max ) * Math.round(price18*m),
+                            (transverse_px_max / price19_max ) * Math.round(price19*m),
+                            (transverse_px_max / price20_max ) * Math.round(price20*m),
+                            (transverse_px_max / price21_max ) * Math.round(price21*m),
+                            (transverse_px_max / price22_max ) * Math.round(price22*m)
+                            ];
 
 
-text(numberWithCommas(price10), 437, 1103); // 계약종별
-text(numberWithCommas(price11), 437, 1138); // 선택 요금
-text(numberWithCommas(price12), 437, 1172); // 정기 검침일
-text(numberWithCommas(price13), 437, 1207); // 계량기 번호
-text(numberWithCommas(price14), 437, 1241); // 계량기 배수
-text(numberWithCommas(price15), 437, 1276); // 역 율
-text(numberWithCommas(price16), 437, 1310); // 계약 전력
+    // 이용자 평균
+    context.fillRect(cal_x(644), cal_y(572), cal_x(graph_px_value[0]), cal_y(graph_bar_height));
 
+    // 나
+    context.fillRect(cal_x(644), cal_y(618), cal_x(graph_px_value[1]), cal_y(graph_bar_height));
 
+    // 전체 평균
+    context.fillRect(cal_x(644), cal_y(664), cal_x(graph_px_value[2]), cal_y(graph_bar_height));
 
-// 가로 막대 그래프 최대 크기
-var transverse_px_max = 278;
-context.fillStyle = "#9FD9F6";
+    // 전 전월
+    context.fillRect(cal_x(644), cal_y(766), cal_x(graph_px_value[3]), cal_y(graph_bar_height));
 
-// 가로 막대 그래프 높이
-var graph_bar_height = 23;
+    // 전 월
+    context.fillRect(cal_x(644), cal_y(812), cal_x(graph_px_value[4]), cal_y(graph_bar_height));
 
+    // 당 월
+    context.fillRect(cal_x(644), cal_y(858), cal_x(graph_px_value[5]), cal_y(graph_bar_height));
 
 
-// 이용자 평균
-var graph_px_value =[
-                        (transverse_px_max / price17_max ) * price17,
-                        (transverse_px_max / price18_max ) * price18,
-                        (transverse_px_max / price19_max ) * price19,
-                        (transverse_px_max / price20_max ) * price20,
-                        (transverse_px_max / price21_max ) * price21,
-                        (transverse_px_max / price22_max ) * price22
-                        ];
+    // 평균 에너지 사용료 비교
 
+    text(numberWithCommas(price17), 901, 588); // 이용자 평균
+    text(numberWithCommas(price18), 901, 634); // 나
+    text(numberWithCommas(price19), 901, 680); // 전체 평균
 
-// 이용자 평균
-context.fillRect(cal_x(644), cal_y(572), cal_x(graph_px_value[0]), cal_y(graph_bar_height));
+    // 3개월 간 에너지 사용료 비교
 
-// 나
-context.fillRect(cal_x(644), cal_y(618), cal_x(graph_px_value[1]), cal_y(graph_bar_height));
+    text(numberWithCommas(price20), 901, 781); // 전 전 월 금액
+    text(numberWithCommas(price21), 901, 827); // 전 월 금액
+    text(numberWithCommas(price22), 901, 873); // 당 월 금액
 
-// 전체 평균
-context.fillRect(cal_x(644), cal_y(664), cal_x(graph_px_value[2]), cal_y(graph_bar_height));
 
-// 전 전월
-context.fillRect(cal_x(644), cal_y(766), cal_x(graph_px_value[3]), cal_y(graph_bar_height));
+    font_size(15);
+    text(numberWithCommas(month2), 623, 783); // 전 전 월
+    text(numberWithCommas(month3), 623, 828); // 전 전 월 금액
+    text(numberWithCommas(month4), 623, 873); // 당 월 금액
 
-// 전 월
-context.fillRect(cal_x(644), cal_y(812), cal_x(graph_px_value[4]), cal_y(graph_bar_height));
 
-// 당 월
-context.fillRect(cal_x(644), cal_y(858), cal_x(graph_px_value[5]), cal_y(graph_bar_height));
 
+    // 세로 막대 그래프 최대 크기
+    var length_px_max = 167;
 
-// 평균 에너지 사용료 비교
 
-text(numberWithCommas(price17), 901, 588); // 이용자 평균
-text(numberWithCommas(price18), 901, 634); // 나
-text(numberWithCommas(price19), 901, 680); // 전체 평균
 
-// 3개월 간 에너지 사용료 비교
+    // 가로 막대 그래프 넓이
+    var graph_bar_width = 42;
 
-text(numberWithCommas(price20), 901, 781); // 전 전 월 금액
-text(numberWithCommas(price21), 901, 827); // 전 월 금액
-text(numberWithCommas(price22), 901, 873); // 당 월 금액
 
 
-font_size(15);
-text(numberWithCommas(month2), 623, 783); // 전 전 월
-text(numberWithCommas(month3), 623, 828); // 전 전 월 금액
-text(numberWithCommas(month4), 623, 873); // 당 월 금액
+    // 주간 / 야간 값
+    var length_graph_value = [
+                                (length_px_max / 100 ) * Math.round(daylight*m),
+                                (length_px_max / 100 ) * Math.round(night*m)
+    ];
 
+    // 주간 그래프 그리기
+    context.fillStyle = "#9FD9F6";
+    context.fillRect(cal_x(735), cal_y(1264), cal_x(-graph_bar_width), cal_y(-length_graph_value[0]));
 
+    // 심야 그래프 그리기
+    context.fillStyle = "#0081CC";
+    context.fillRect(cal_x(820), cal_y(1264), cal_x(-graph_bar_width), cal_y(-length_graph_value[1]));
 
-// 세로 막대 그래프 최대 크기
-var length_px_max = 167;
 
 
+    // 주간 / 심야 충전 비율
+    text(daylight+"%", 729, 1118); // 주간
+    text(night+"%", 813, 1118); // 야간
 
-// 가로 막대 그래프 넓이
-var graph_bar_width = 42;
 
+    font_size(19);
+    text(numberWithCommas(Math.round(price23*m)), 1438, 252); // 전력량 요금
 
+    font_size(14);
+    text(numberWithCommas(Math.round(price24*m)), 1440, 299); // 경부하 요금
+    text(numberWithCommas(Math.round(price25*m)), 1440, 334); // 중간부하 요금
+    text(numberWithCommas(Math.round(price26*m)), 1440, 368); // 최대부하 요금
 
-// 주간 / 야간 값
-var length_graph_value = [
-                            (length_px_max / 100 ) * daylight,
-                            (length_px_max / 100 ) * night
-];
 
-// 주간 그래프 그리기
-context.fillStyle = "#9FD9F6";
-context.fillRect(cal_x(735), cal_y(1264), cal_x(-graph_bar_width), cal_y(-length_graph_value[0]));
 
-// 심야 그래프 그리기
-context.fillStyle = "#0081CC";
-context.fillRect(cal_x(820), cal_y(1264), cal_x(-graph_bar_width), cal_y(-length_graph_value[1]));
 
 
 
-// 주간 / 심야 충전 비율
-text(daylight+"%", 729, 1118); // 주간
-text(night+"%", 813, 1118); // 야간
 
 
-font_size(19);
-text(numberWithCommas(price23), 1438, 252); // 전력량 요금
 
-font_size(14);
-text(numberWithCommas(price24), 1440, 299); // 경부하 요금
-text(numberWithCommas(price25), 1440, 334); // 중간부하 요금
-text(numberWithCommas(price26), 1440, 368); // 최대부하 요금
+    //그래프 그리기
 
+    // 그래프 포인트 찍기 및 수치라인 그리기 작업 진행
 
+    // 수치 라인 그리기
 
+        context.globalAlpha = 1;
+        context.fillStyle = "#F7F7F7";
+        context.beginPath();
 
 
+        for(var i = 0 ;i < graph_value.length; i++){
 
+         graph_line(i,Math.round(graph_value[i]*m));
 
+        }//for i
 
 
-//그래프 그리기
 
-// 그래프 포인트 찍기 및 수치라인 그리기 작업 진행
+       context.fill();
+       context.closePath();
 
-// 수치 라인 그리기
 
-    context.globalAlpha = 1;
-    context.fillStyle = "#F7F7F7";
-    context.beginPath();
 
 
-    for(var i = 0 ;i < graph_value.length; i++){
 
-     graph_line(i,graph_value[i]);
 
-    }//for i
+       // 그래프 선 그리기
 
 
+        // 가로선 그리기
 
-   context.fill();
-   context.closePath();
+        context.beginPath();
+        context.globalAlpha = 1;
+        context.strokeStyle = "#9B9B9B";
+        context.lineWidth=cal_x(1);
 
+        // 첫번째 선
+        context.moveTo(cal_x(1155),cal_y(626));
+        context.lineTo(cal_x(1904),cal_y(626));
 
+        // 두번째 선
+        context.moveTo(cal_x(1155),cal_y(684));
+        context.lineTo(cal_x(1904),cal_y(684));
 
 
+        // 세번째 선
+        context.moveTo(cal_x(1155),cal_y(742));
+        context.lineTo(cal_x(1904),cal_y(742));
 
+         // 네번째 선
+        context.moveTo(cal_x(1155),cal_y(799.5));
+        context.lineTo(cal_x(1904),cal_y(799.5));
 
-   // 그래프 선 그리기
 
 
-    // 가로선 그리기
+        // 세로선 그리기
 
-    context.beginPath();
-    context.globalAlpha = 1;
-    context.strokeStyle = "#9B9B9B";
-    context.lineWidth=cal_x(1);
+        for(var i = 0 ; i<25;i++ ){
+          context.moveTo(cal_x(1177+(29.45*i)),cal_y(799.5));
+          context.lineTo(cal_x(1177+(29.45*i)),cal_y(810));
+        }// for i
 
-    // 첫번째 선
-    context.moveTo(cal_x(1155),cal_y(626));
-    context.lineTo(cal_x(1904),cal_y(626));
 
-    // 두번째 선
-    context.moveTo(cal_x(1155),cal_y(684));
-    context.lineTo(cal_x(1904),cal_y(684));
 
 
-    // 세번째 선
-    context.moveTo(cal_x(1155),cal_y(742));
-    context.lineTo(cal_x(1904),cal_y(742));
 
-     // 네번째 선
-    context.moveTo(cal_x(1155),cal_y(799.5));
-    context.lineTo(cal_x(1904),cal_y(799.5));
 
+       context.stroke();
+       context.closePath();
 
 
-    // 세로선 그리기
 
-    for(var i = 0 ; i<25;i++ ){
-      context.moveTo(cal_x(1177+(29.45*i)),cal_y(799.5));
-      context.lineTo(cal_x(1177+(29.45*i)),cal_y(810));
-    }// for i
 
 
 
 
+        var max = graph_value[0] ; // 가장 큰 숫자
+        var min = graph_value[0] ; // 가장 작은 숫자
+        var aver = 0 ; // 평균
 
+        //  가장 큰 숫자, 작은 숫자 구하기
+        for(var i = 0 ; i< graph_value.length; i++){
 
-   context.stroke();
-   context.closePath();
+            if(max < graph_value[i]){
+             max = graph_value[i];
+            }
 
+            if(min > graph_value[i]){
+             min = graph_value[i];
+            }
 
+            aver += graph_value[i];
 
+        }//for i
 
+        // 평균 구하기
+        aver = aver / graph_value.length*m;
 
 
 
-    var max = graph_value[0] ; // 가장 큰 숫자
-    var min = graph_value[0] ; // 가장 작은 숫자
-    var aver = 0 ; // 평균
+        // 평균 픽셀 높이 구하기
+        var aver_px = get_graph_po_xy(0,aver)[1];
 
-    //  가장 큰 숫자, 작은 숫자 구하기
-    for(var i = 0 ; i< graph_value.length; i++){
 
-        if(max < graph_value[i]){
-         max = graph_value[i];
-        }
+        context.beginPath();
+        context.globalAlpha = 1;
+        context.strokeStyle = "#6CBB5A";
 
-        if(min > graph_value[i]){
-         min = graph_value[i];
-        }
+        context.setLineDash([cal_x(8)]);
+        context.lineWidth=cal_x(1);
 
-        aver += graph_value[i];
+        // 평균 선
+        context.moveTo(cal_x(1155),cal_y(aver_px));
+        context.lineTo(cal_x(1904),cal_y(aver_px));
 
-    }//for i
 
-    // 평균 구하기
-    aver = aver / graph_value.length;
+       context.stroke();
+       context.closePath();
 
 
 
-    // 평균 픽셀 높이 구하기
-    var aver_px = get_graph_po_xy(0,aver)[1];
 
 
-    context.beginPath();
-    context.globalAlpha = 1;
-    context.strokeStyle = "#6CBB5A";
 
-    context.setLineDash([cal_x(8)]);
-    context.lineWidth=cal_x(1);
+        // 그래프 가 표현할 수 있는 범위
+        var cab = max_price - min_price;
 
-    // 평균 선
-    context.moveTo(cal_x(1155),cal_y(aver_px));
-    context.lineTo(cal_x(1904),cal_y(aver_px));
+        // 1층 올라 갈때 필요한 금액
+        var one_Layer = cab/4;
 
+        var layer1 = min_price + (one_Layer * 0); // 1 층 금액
+        var layer2 = min_price + (one_Layer * 1); // 2 층 금액
+        var layer3 = min_price + (one_Layer * 2); // 3 층 금액
+        var layer4 = min_price + (one_Layer * 3); // 4 층 금액
 
-   context.stroke();
-   context.closePath();
 
+        font_size(cal_x(13));
 
+        // 그래프 금액 그리기
+        text(numberWithCommas(layer1), cal_x(1128), cal_y(805));
+        text(numberWithCommas(layer2), cal_x(1128), cal_y(747));
+        text(numberWithCommas(layer3), cal_x(1128), cal_y(689));
+        text(numberWithCommas(layer4), cal_x(1128), cal_y(630));
 
 
+         context.textAlign = 'start';
 
+         // 최고금액, 최저금액, 평균금액 그리기
+         font_size(cal_x(16));
 
-    // 그래프 가 표현할 수 있는 범위
-    var cab = max_price - min_price;
+         text(numberWithCommas(Math.round(max*m))+" 원", cal_x(1360), cal_y(888));
+         text(numberWithCommas(Math.round(min*m))+" 원", cal_x(1508), cal_y(888));
+         text(numberWithCommas(Math.round(aver))+" 원", cal_x(1659), cal_y(888));
 
-    // 1층 올라 갈때 필요한 금액
-    var one_Layer = cab/4;
 
-    var layer1 = min_price + (one_Layer * 0); // 1 층 금액
-    var layer2 = min_price + (one_Layer * 1); // 2 층 금액
-    var layer3 = min_price + (one_Layer * 2); // 3 층 금액
-    var layer4 = min_price + (one_Layer * 3); // 4 층 금액
 
 
-    font_size(cal_x(13));
+       context.textAlign = 'end';
 
-    // 그래프 금액 그리기
-    text(numberWithCommas(layer1), cal_x(1128), cal_y(805));
-    text(numberWithCommas(layer2), cal_x(1128), cal_y(747));
-    text(numberWithCommas(layer3), cal_x(1128), cal_y(689));
-    text(numberWithCommas(layer4), cal_x(1128), cal_y(630));
 
+         // 수치 점 그리기
+        for(var i = 0 ;i < graph_value.length; i++){
+
+            graph_point(i,Math.round(graph_value[i]*m));
+
+        }//for i
+
+
+        //시간 그리기
+        font_size(cal_x(15.4));
+        text(Math.round(use_time_aver[0]*m)+"시간"+" "+Math.round(use_time_aver[1]*m)+"분", cal_x(1404),cal_y(1080));
+
+
+        var user_time_ceil = use_time_aver[0]; //평균 이용시간
+
+        // 분 0 이상이면 올림하기
+        if(use_time_aver[1] > 0){
+            user_time_ceil++;
+        }//if
+
+
+
+
+        // 최적의 가격 값을 계산할 배열 만들기
+        var cal_price = new Array(graph_value.length);
+
+
+        // 충전 시간을 가정하고 가격을 모두 계산 해보기
+        for(var i = 0; i < graph_value.length; i++){
+
+            var temp = 0;
+
+             for(var k = 0; k< user_time_ceil; k++){
+
+             var index = i+k;
+               if(index >= graph_value.length){
+                    index -= graph_value.length;
+                }//if
+              temp += graph_value[index];
+            }//for k
+
+            cal_price[i] = temp;
+
+        }//for i
+
+
+
+        var good_price = cal_price[0];
+
+        // 제일 저렴한 가격을 추가
+        for(var i = 0; i < cal_price.length; i++){
+
+          if(good_price > cal_price[i]){
+            good_price = cal_price[i];
+          }// if
+
+
+        }//for i
+
+
+        // 최저 가격대 조합 순서와, 개수 찾기
+       var good_price_index = new Array();
+
+       for(var i = 0; i < cal_price.length; i++){
+
+           if(good_price == cal_price[i]){
+             good_price_index.push(i);
+           }// if
+
+       }//for i
+
+
+
+
+        // 시간 배열
+      var times = [
+                    "오전 12시","오전  1시","오전  2시","오전  3시","오전  4시","오전  5시",
+                    "오전  6시","오전  7시","오전  8시","오전  9시","오전 10시","오전 11시",
+                    "오후 12시","오후  1시","오후  2시","오후  3시","오후  4시","오후  5시",
+                    "오후  6시","오후  7시","오후  8시","오후  9시","오후 10시","오후 11시",
+                    "오후 12시"
+                    ];
+
+
+
+      // 절약 시간대 그리기
+      for(var i = 0; i < good_price_index.length; i++){
+
+        var index = (good_price_index[i] + user_time_ceil)-1 ;
+               if(index >= graph_value.length){
+                    index -= graph_value.length;
+                }//if
+
+
+       text(times[good_price_index[i]] +"~"+times[index], cal_x(1225),cal_y(1105+(60*i)));
+
+      }//for i
 
      context.textAlign = 'start';
 
-     // 최고금액, 최저금액, 평균금액 그리기
-     font_size(cal_x(16));
-
-     text(numberWithCommas(max)+" 원", cal_x(1360), cal_y(888));
-     text(numberWithCommas(min)+" 원", cal_x(1508), cal_y(888));
-     text(numberWithCommas(Math.round(aver))+" 원", cal_x(1659), cal_y(888));
+    var price_forecasting  = numberWithCommas((Math.round(good_price * 30*m)));
 
 
-
-
-   context.textAlign = 'end';
-
-    // 수치 점 그리기
-    for(var i = 0 ;i < graph_value.length; i++){
-
-        graph_point(i,graph_value[i]);
-
-    }//for i
-
-
-
-    //시간 그리기
-    font_size(cal_x(15.4));
-    text(use_time_aver[0]+"시간"+" "+use_time_aver[1]+"분", cal_x(1404),cal_y(1080));
-
-
-    var user_time_ceil = use_time_aver[0]; //평균 이용시간
-
-    // 분 0 이상이면 올림하기
-    if(use_time_aver[1] > 0){
-        user_time_ceil++;
-    }//if
-
-
-
-
-    // 최적의 가격 값을 계산할 배열 만들기
-    var cal_price = new Array(graph_value.length);
-
-
-    // 충전 시간을 가정하고 가격을 모두 계산 해보기
-    for(var i = 0; i < graph_value.length; i++){
-
-        var temp = 0;
-
-         for(var k = 0; k< user_time_ceil; k++){
-
-         var index = i+k;
-           if(index >= graph_value.length){
-                index -= graph_value.length;
-            }//if
-          temp += graph_value[index];
-        }//for k
-
-        cal_price[i] = temp;
-
-    }//for i
-
-
-
-    var good_price = cal_price[0];
-
-    // 제일 저렴한 가격을 추가
-    for(var i = 0; i < cal_price.length; i++){
-
-      if(good_price > cal_price[i]){
-        good_price = cal_price[i];
-      }// if
-
-
-    }//for i
-
-
-    // 최저 가격대 조합 순서와, 개수 찾기
-   var good_price_index = new Array();
-
-   for(var i = 0; i < cal_price.length; i++){
-
-       if(good_price == cal_price[i]){
-         good_price_index.push(i);
-       }// if
-
-   }//for i
-
-
-
-
-    // 시간 배열
-  var times = [
-                "오전 12시","오전 1시","오전 2시","오전 3시","오전 4시","오전 5시",
-                "오전 6시","오전 7시","오전 8시","오전 9시","오전 10시","오전 11시",
-                "오후 12시","오후 1시","오후 2시","오후 3시","오후 4시","오후 5시",
-                "오후 6시", "오후 7시","오후 8시", "오후 9시", "오후 10시", "오후 11시",
-                "오후 12시"
-                ];
-
-
-
-  // 절약 시간대 그리기
-  for(var i = 0; i < good_price_index.length; i++){
-
-    var index = good_price_index[i] + user_time_ceil ;
-           if(index >= graph_value.length){
-                index -= graph_value.length;
-            }//if
-
-
-   text(times[good_price_index[i]] +"~"+times[index], cal_x(1225),cal_y(1105+(60*i)));
-
-  }//for i
-
- context.textAlign = 'start';
-
-var price_forecasting  = numberWithCommas((good_price * 30));
-
-
-text(price_forecasting + "원 입니다.",cal_x(1326),cal_y(1130));
+    text(price_forecasting + "원 입니다.",cal_x(1326),cal_y(1130));
 
 
 
 
 
+    if(roof_cnt==0){
+        //qr 코드 사이즈
+      var size = Math.round(cal_x(100));
+      // 구글 api 이용
+      var gqrapi = "http://chart.apis.google.com/chart?cht=qr&chs="+size+"x"+size+"&choe=UTF-8&chld=H|0";
 
-//qr 코드 사이즈
-var size = Math.round(cal_x(100));
-// 구글 api 이용
-var gqrapi = "http://chart.apis.google.com/chart?cht=qr&chs="+size+"x"+size+"&choe=UTF-8&chld=H|0";
-
-var qr = new Image();
+      var qr = new Image();
 
 
-qr.src= gqrapi+"&chl="+encodeURIComponent(qr_body); //입력 데이터 인코딩해서 구글 API에 파라메터로 붙이고...
+      qr.src= gqrapi+"&chl="+encodeURIComponent(qr_body); //입력 데이터 인코딩해서 구글 API에 파라메터로 붙이고...
 
-qr.onload = function(){
-    context.drawImage(qr, cal_x(1552), cal_y(1066));
-}
+      qr.onload = function(){
+          context.drawImage(qr, cal_x(1552), cal_y(1066));
+      }
+
+   }
+
 
 
 
@@ -857,7 +889,11 @@ qr.onload = function(){
 
 
 
-}/* graph_point */
+}/* graph_line */
+
+
+
+
 
 };
 
@@ -876,7 +912,13 @@ qr.onload = function(){
 
  function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}/* numberWithCommas() */</script>
+}/* numberWithCommas() */
+
+
+
+
+
+}/* draw */</script>
 
 </body>
 </html>
