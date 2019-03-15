@@ -31,6 +31,8 @@ Your browser does not support the HTML5 canvas tag.r{
 <script>
 
 
+
+
 // 고지서 내용 설정
 // -------------------------- 좌측 페이지 --------------------------
 
@@ -269,15 +271,41 @@ image.onload = function(){
 	draw();
 }
 
-window.onresize = function() { 
- 	draw();
+var is_mobile = false;
+
+
+var mobileArr = new Array("iPhone", "iPod", "BlackBerry", "Android", "Windows CE", "LG", "MOT", "SAMSUNG", "SonyEricsson");
+
+for(var txt in mobileArr){
+    if(navigator.userAgent.match(mobileArr[txt]) != null){
+        is_mobile = true;
+        break;
+    }//if
+
+}//for
+
+
+
+// 모바일이 아닐때만 실행
+if(!is_mobile){
+	window.onresize = function() { 
+ 		draw();
+	}
 }
+
+
+
 
 function draw() {
 	   
        
-// 화면 크기 캔버스 크기와 자동으로 맞추기
-context.canvas.width=window.innerWidth;
+      
+      if(is_mobile){
+      	context.canvas.width=window.innerWidth*2;
+      }else{
+     	 // 화면 크기 캔버스 크기와 자동으로 맞추기
+		context.canvas.width=window.innerWidth;
+      }
 
 // 캔버스 크기 비율 조절
 context.canvas.height=context.canvas.width/1.41407808492448;
