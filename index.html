@@ -303,6 +303,7 @@ for(var txt in mobileArr){
     // 모바일이 아닐때만 실행
     if(!is_mobile){
         window.onresize = function() {
+            roof_cnt = 10;
             draw();
         }
     }
